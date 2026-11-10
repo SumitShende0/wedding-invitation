@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>शाही लग्नपत्रिका | चि. निखिल आणि चि. सौ. का. वीणा</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Yatra One, Rozha One, Noto Serif Devanagari, Noto Sans Devanagari, Mukta, Tiro Devanagari Marathi, Alex Brush, Cormorant Garamond, Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Noto+Serif+Devanagari:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Mukta:wght@400;500;600;700&family=Rozha+One&family=Tiro+Devanagari+Marathi:ital@0;1&family=Yatra+One&display=swap&subset=devanagari,latin" rel="stylesheet">
+  
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --lavender-soft: #ebdbe5;
+      --lavender-shadow: #cbb4c4;
+      --deep-wine: #721628;
+      --royal-gold: #c59b4b;
+      --ivory-warm: #faf7f2;
+      --card-white: #ffffff;
+      --text-muted: #72676b;
+      --text-dark: #2b1f24;
+    }
+
+    body {
+      background-color: #120d11;
+      font-family: 'Noto Serif Devanagari', 'Noto Sans Devanagari', 'Mukta', 'Tiro Devanagari Marathi', 'Cormorant Garamond', serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: 'kern' 1, 'liga' 1, 'clig' 1, 'calt' 1, 'dev2' 1;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-yatra { font-family: 'Yatra One', 'Rozha One', cursive; }
+    .font-marathi { font-family: 'Noto Serif Devanagari', 'Mukta', 'Tiro Devanagari Marathi', serif; }
+    .font-alex { font-family: 'Alex Brush', cursive; }
+    .font-montserrat { font-family: 'Montserrat', sans-serif; }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+
+    /* Clean scrollbar styling */
+    .app-screen::-webkit-scrollbar { display: none; }
+    .app-screen { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Strict pre-open scroll lock */
+    .scroll-locked {
+      overflow: hidden !important;
+      touch-action: none !important;
+      overscroll-behavior: none !important;
+    }
+
+    /* 3D Envelope Physics */
+    #envelope-wrapper {
+      perspective: 1600px;
+    }
+
+    .envelope-flap {
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transition: transform 1.8s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.8s ease;
+    }
+
+    .flap-top-open {
+      transform: rotateX(175deg);
+      opacity: 0;
+    }
+    .flap-left-open {
+      transform: rotateY(-118deg);
+      opacity: 0;
+    }
+    .flap-right-open {
+      transform: rotateY(118deg);
+      opacity: 0;
+    }
+
+    .embossed-pattern {
+      background-image: radial-gradient(rgba(180, 140, 165, 0.22) 1.2px, transparent 0);
+      background-size: 16px 16px;
+    }
+
+    /* 3D Butterfly Flapping Animation */
+    @keyframes butterflyFloat {
+      0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
+      50% { transform: translateY(-12px) scale(1.06) rotate(1.5deg); }
+    }
+    @keyframes wingLeftFlap {
+      0%, 100% { transform: rotateY(0deg); }
+      50% { transform: rotateY(-68deg); }
+    }
+    @keyframes wingRightFlap {
+      0%, 100% { transform: rotateY(0deg); }
+      50% { transform: rotateY(68deg); }
+    }
+
+    .animate-butterfly { animation: butterflyFloat 3.2s ease-in-out infinite; }
+    .animate-wing-l { transform-origin: right center; animation: wingLeftFlap 0.72s ease-in-out infinite alternate; }
+    .animate-wing-r { transform-origin: left center; animation: wingRightFlap 0.72s ease-in-out infinite alternate; }
+
+    /* Wax seal pulse animation */
+    @keyframes waxGlow {
+      0%, 100% { box-shadow: 0 10px 25px -4px rgba(114, 22, 40, 0.38), 0 0 0 0 rgba(197, 155, 75, 0.4); }
+      50% { box-shadow: 0 15px 35px -2px rgba(114, 22, 40, 0.55), 0 0 0 10px rgba(197, 155, 75, 0); }
+    }
+    .pulse-seal { animation: waxGlow 2.5s infinite; }
+
+    @keyframes gentleBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .bob-hint { animation: gentleBob 2s ease-in-out infinite; }
+
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen py-0 sm:py-6 bg-[#120d11] scroll-locked">
+
+  <!-- Mobile Viewport Frame (Vercel mobile-first layout) -->
+  <div id="app-container" class="relative w-full max-w-[430px] h-[100dvh] sm:h-[915px] sm:rounded-[44px] overflow-hidden bg-[#FAF7F2] shadow-[0_30px_90px_rgba(0,0,0,0.85)] flex flex-col app-screen scroll-locked">
+
+    <!-- ========================================================
+         FLOATING AUDIO CONTROLLER (संगीत चालू / बंद)
+         ======================================================== -->
+    <div class="fixed bottom-5 right-5 sm:absolute z-40">
+      <button id="audio-toggle-btn" 
+              class="flex items-center px-2 py-2 rounded-full bg-white/95 backdrop-blur-md border border-[#E7DCE3] shadow-[0_8px_20px_rgba(43,31,36,0.12)] text-[#721628] active:scale-95 transition-all">
+        <!-- Equalizer bars -->
+        <span class="flex items-end gap-[3px] h-3.5">
+          <span id="eq-1" class="w-[3px] h-2 bg-[#721628] rounded-full transition-all"></span>
+          <span id="eq-2" class="w-[3px] h-3.5 bg-[#721628] rounded-full transition-all"></span>
+          <span id="eq-3" class="w-[3px] h-1.5 bg-[#721628] rounded-full transition-all"></span>
+        </span>
+        <span id="audio-label" class="font-montserrat text-[11px] font-semibold tracking-wider text-[#2B1F24]">
+          
+        </span>
+      </button>
+    </div>
+
+    <!-- Hidden HTML5 Audio element for the requested song -->
+    <audio id="bg-audio" loop preload="auto">
+      <source src="./mangalashtak.mp3"/>
+    </audio>
+
+    <!-- ========================================================
+         HERO SECTION 1: 3D OPENING ENVELOPE WITH BUTTERFLY WAX SEAL
+         ======================================================== -->
+    <div id="envelope-overlay" class="absolute inset-0 z-50 flex items-center justify-center overflow-hidden bg-[#D8C6D2]">
+      
+      <!-- Envelope Container -->
+      <div id="envelope-wrapper" class="relative w-full h-full flex flex-col justify-between items-center text-center p-6 bg-gradient-to-b from-[#E7D6E1] via-[#EBDDE7] to-[#DFCCDA]">
+        
+        <!-- Embossed Floral Texture -->
+        <div class="absolute inset-0 pointer-events-none opacity-25 embossed-pattern"></div>
+        
+        <!-- Top Monogram & Marathi Header -->
+        <div class="relative z-10 pt-8">
+          <h2 class="font-alex text-5xl sm:text-6xl text-[#721628] tracking-wider drop-shadow-sm">
+            N & V
+          </h2>
+          <p class="font-marathi text-sm tracking-wider text-[#721628] mt-1">
+            ।। शाही लग्नपत्रिका ।।
+          </p>
+          <p class="font-montserrat text-[9px] tracking-[0.25em] uppercase text-[#72676B] font-semibold">
+            Wedding Invitation
+          </p>
+        </div>
+
+        <!-- 3D Envelope Flaps (Top triangle, Left, Right folds) -->
+        <div class="absolute inset-0 z-10 pointer-events-none">
+          <!-- Top Triangle Flap -->
+          <svg id="flap-top" class="envelope-flap absolute top-0 inset-x-0 w-full h-[52%] origin-top drop-shadow-md" viewBox="0 0 400 450" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="flapGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#F3E5EF" />
+                <stop offset="100%" stop-color="#DECBDA" />
+              </linearGradient>
+            </defs>
+            <polygon points="0,0 400,0 200,320" fill="url(#flapGrad)" />
+            <path d="M 12 12 L 200 308 L 388 12" stroke="#FFF7FC" stroke-width="2" fill="none" opacity="0.8" />
+            <path d="M 22 12 L 200 292 L 378 12" stroke="#CBB4C4" stroke-width="1.2" fill="none" opacity="0.6" />
+          </svg>
+
+          <!-- Left Flap Fold -->
+          <svg id="flap-left" class="envelope-flap absolute inset-y-0 left-0 h-full w-[54%] origin-left drop-shadow-sm" viewBox="0 0 220 700" preserveAspectRatio="none">
+            <polygon points="0,0 220,350 0,700" fill="#E6D2E0" opacity="0.85" />
+            <path d="M 0 10 L 210 350 L 0 690" stroke="#FFF7FC" stroke-width="1.5" fill="none" opacity="0.5" />
+          </svg>
+
+          <!-- Right Flap Fold -->
+          <svg id="flap-right" class="envelope-flap absolute inset-y-0 right-0 h-full w-[54%] origin-right drop-shadow-sm" viewBox="0 0 220 700" preserveAspectRatio="none">
+            <polygon points="220,0 0,350 220,700" fill="#E1CEDB" opacity="0.85" />
+            <path d="M 220 10 L 10 350 L 220 690" stroke="#FFF7FC" stroke-width="1.5" fill="none" opacity="0.5" />
+          </svg>
+        </div>
+
+        <!-- Central Butterfly Wax Seal Trigger -->
+        <div id="seal-trigger" class="relative z-30 my-auto flex flex-col items-center justify-center cursor-pointer transition-all duration-500 active:scale-95">
+          
+          <div class="relative w-32 h-32 rounded-full p-2 bg-gradient-to-tr from-[#DECBDA] via-[#FFF9FD] to-[#D5BECD] pulse-seal flex items-center justify-center">
+            <!-- Inner Wax Seal -->
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-[#EEDFE8] via-[#E2CEDD] to-[#CFB4C8] border-2 border-[#FAF2F7] shadow-inner flex flex-col items-center justify-center relative">
+              
+              <!-- Embossed Golden Butterfly -->
+              <svg class="w-16 h-16 text-[#721628] drop-shadow-[0_2px_4px_rgba(255,255,255,0.7)]" viewBox="0 0 64 64" fill="currentColor">
+                <!-- Left Wing -->
+                <path d="M30 32 C26 22 10 14 6 22 C2 30 14 44 26 38 C18 48 10 60 18 62 C26 64 30 46 32 38 Z" opacity="0.9" />
+                <!-- Right Wing -->
+                <path d="M34 32 C38 22 54 14 58 22 C62 30 50 44 38 38 C46 48 54 60 46 62 C38 64 34 46 32 38 Z" opacity="0.9" />
+                <!-- Body -->
+                <ellipse cx="32" cy="36" rx="2" ry="12" fill="#4a0e1a" />
+                <path d="M31 24 C27 20 25 14 24 10 M33 24 C37 20 39 14 40 10" stroke="#4a0e1a" stroke-width="1.5" stroke-linecap="round" fill="none" />
+              </svg>
+
+              <!-- Subtle dotted ring inside seal -->
+              <div class="absolute inset-1.5 rounded-full border border-[#C59B4B]/60 border-dashed pointer-events-none"></div>
+            </div>
+          </div>
+
+          <p class="font-marathi text-xs tracking-wider text-[#721628] mt-4 bob-hint flex items-center gap-1.5">
+            <span>🌸</span> सीलवर टॅप करून पत्रिका उघडा <span>🌸</span>
+          </p>
+          <span class="font-montserrat text-[9px] uppercase tracking-[0.2em] text-[#72676B]">
+            Tap The Seal To Open
+          </span>
+        </div>
+
+        <!-- Bottom Family Salutation -->
+        <div class="relative z-10 pb-6 text-[#721628]/70">
+          <p class="font-marathi text-sm text-[#721628] font-semibold tracking-wide mb-1">
+            — : निमंत्रक : —
+          </p>
+          <p class="font-marathi text-sm text-[#72676B]">
+            — सौ. सुनिता व श्री. अनिल पांडुरंग वाणी —
+          </p>
+          <p class="font-marathi text-sm"> - समस्त शेंडे परिवार - </p>
+        </div>
+
+      </div>
+
+      <!-- REVEALED CARD LAYER: 3D Fluttering Butterfly & "आपणास आग्रहाचे आमंत्रण" -->
+      <div id="butterfly-reveal-screen" class="absolute inset-0 z-20 flex flex-col items-center justify-center p-8 bg-gradient-to-b from-[#F5EAF1] via-[#FAF3F7] to-[#F1E4EC] opacity-0 pointer-events-none transition-opacity duration-1000 text-center">
+        
+        <!-- Monogram -->
+        <div class="mb-3">
+          <h2 class="font-alex text-5xl text-[#721628]">N & V</h2>
+          <p class="font-marathi text-xs text-[#721628] mt-0.5">।। शुभविवाह ।।</p>
+        </div>
+
+        <!-- 3D Fluttering Butterfly -->
+        <div class="relative w-40 h-40 my-4 animate-butterfly flex items-center justify-center">
+          <svg class="w-36 h-36 drop-shadow-[0_15px_25px_rgba(114,22,40,0.2)]" viewBox="0 0 100 100" fill="none">
+            <!-- Left Wing -->
+            <g class="animate-wing-l">
+              <path d="M48 50 C38 30 12 18 6 32 C0 45 22 66 42 58 C28 72 16 90 30 92 C42 94 48 68 50 54 Z" fill="url(#wingGradL)" />
+              <path d="M46 48 C36 34 22 26 12 36" stroke="#FFF7FC" stroke-width="1.2" opacity="0.65" />
+            </g>
+            <!-- Right Wing -->
+            <g class="animate-wing-r">
+              <path d="M52 50 C62 30 88 18 94 32 C100 45 78 66 58 58 C72 72 84 90 70 92 C58 94 52 68 50 54 Z" fill="url(#wingGradR)" />
+              <path d="M54 48 C64 34 78 26 88 36" stroke="#FFF7FC" stroke-width="1.2" opacity="0.65" />
+            </g>
+            <!-- Body -->
+            <ellipse cx="50" cy="56" rx="3" ry="17" fill="#721628" />
+            <path d="M49 39 C43 32 40 22 38 18 M51 39 C57 32 60 22 62 18" stroke="#721628" stroke-width="2" stroke-linecap="round" />
+
+            <defs>
+              <linearGradient id="wingGradL" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="50%" stop-color="#EEDDE7" />
+                <stop offset="100%" stop-color="#C59B4B" />
+              </linearGradient>
+              <linearGradient id="wingGradR" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="50%" stop-color="#EEDDE7" />
+                <stop offset="100%" stop-color="#C59B4B" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <p class="font-montserrat text-[10px] tracking-[0.3em] text-[#72676B] uppercase mt-1">
+          आपणास व परिवारास
+        </p>
+        <h1 class="font-marathi text-2xl sm:text-3xl text-[#721628] font-normal tracking-wide mt-1">
+          आग्रहाचे निमंत्रण !
+        </h1>
+        <p class="font-montserrat text-[9px] tracking-[0.25em] uppercase text-[#72676B] mt-1">
+          You're Cordially Invited
+        </p>
+
+        <!-- Scroll Down prompt -->
+        <div class="mt-8 flex flex-col items-center animate-bounce">
+          <span class="font-marathi text-xs tracking-wider text-[#72676B]">
+            खाली स्क्रोल करा
+          </span>
+          <span class="text-xs text-[#721628] mt-1">↓</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         MAIN INVITATION SCROLLABLE FLOW (Warm Ivory Canvas)
+         ======================================================== -->
+    <div id="main-content" class="relative z-10 w-full min-h-full px-4 pt-8 pb-16 space-y-12">
+
+      <!-- ========================================================
+           SECTION 2: LORD GANESHA, KULDHAIVAT & COUPLE BLESSINGS
+           ======================================================== -->
+      <section class="text-center pt-2 px-2">
+        
+        <!-- Sacred Ganesha Emblem -->
+        <div class="w-16 h-16 mx-auto mb-3 flex items-center justify-center">
+          <img src="./ganesha1.png" alt="Shri Ganeshaya Namah">
+        </div>
+
+        <p class="font-marathi text-base text-[#721628] tracking-widest">
+          ।। श्री गणेशाय नमः ।।
+        </p>
+        <p class="font-marathi text-xs text-[#C59B4B] tracking-wider mt-0.5">
+          <!-- ।। कुलदैवत प्रसन्न ।। श्री अंबिका भवानी प्रसन्न ।। -->
+          ।। श्री कुलस्वामिनी अंबिका भवानी माता प्रसन्न ।।
+        </p>
+
+        <!-- Traditional Invitation Shloka -->
+        <p class="font-marathi italic text-sm text-[#72676B] max-w-xs mx-auto mt-3 leading-relaxed">
+          "वक्रतुंड महाकाय सूर्यकोटि समप्रभ ।<br/>
+          निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥"<br/>
+          <span class="text-xs not-italic text-[#2B1F24] block mt-2">
+            परमेश्वराच्या कृपेने व वडीलधाऱ्यांच्या आशीर्वादाने, आमच्या सुपुत्राचा शुभविवाह संपन्न करण्याचे योजिले आहे.
+          </span>
+        </p>
+
+        <!-- Couple's Names in Royal Devanagari & Latin Serif -->
+        <div class="my-6">
+          <div class="space-y-1">
+            <span class="font-marathi text-xm text-[#72676B] block mb-2">वर</span>
+            <h2 class="font-marathi text-3xl sm:text-4xl text-[#2B1F24] font-normal tracking-wide">
+              चि. निखिल
+            </h2>
+            <p class="font-montserrat text-xm text-[#721628] font-semibold tracking-wider">
+              Mr. Nikhil
+            </p>
+          </div>
+
+          <!-- Decorative divider with Chandrakor -->
+          <div class="flex items-center justify-center gap-3 my-2">
+            <div class="w-12 h-[1px] bg-[#C59B4B]/60"></div>
+            <!-- <span class="font-marathi text-2xl text-[#721628]">संग</span> -->
+             <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="2rem" height="2rem">
+                <path fill="#721628" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+
+            <div class="w-12 h-[1px] bg-[#C59B4B]/60"></div>
+          </div>
+
+          <div class="space-y-1">
+            <span class="font-marathi text-xm text-[#72676B] block">वधू</span>
+            <h2 class="font-marathi text-3xl sm:text-4xl text-[#2B1F24] font-normal tracking-wide">
+              चि. सौ. का. वीणा
+            </h2>
+            <p class="font-montserrat text-xm text-[#721628] font-semibold tracking-wider">
+             Ms. Veena
+            </p>
+          </div>
+        </div>
+
+        <!-- Parents Blessing Details in Marathi -->
+        <div class="grid grid-cols-2 gap-3 text-xs font-marathi text-[#72676B] max-w-sm mx-auto text-center border-t border-b border-[#E7DCE3] py-4 bg-white/60 rounded-xl">
+          <div class="px-2">
+            <span class="font-marathi text-[#721628] block text-xs">वराचे माता-पिता</span>
+            सौ. सुनिता व<br/>श्री. अनिल शेंडे<br/>
+            <span class="font-montserrat text-[10px] text-[#72676B]">(पारोळा)</span>
+          </div>
+          <div class="px-2 border-l border-[#E7DCE3]">
+            <span class="font-marathi text-[#721628] block text-xs">वधूचे माता-पिता</span>
+            सौ. मालती व<br/>श्री. चंद्रकांत खानकरी<br/>
+            <span class="font-montserrat text-[10px] text-[#72676B]">(धुळे)</span>
+          </div>
+        </div>
+
+        <!-- Scroll Prompt -->
+        <div class="mt-6 flex flex-col items-center">
+          <span class="font-marathi text-xs tracking-wider text-[#72676B]">
+            शुभ मुहूर्त जाणून घेण्यासाठी स्क्रोल करा
+          </span>
+          <span class="text-xs text-[#721628] mt-1 bob-hint">🌸</span>
+        </div>
+
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 3: 3-CARD SCRATCH TO REVEAL DATE (शुभ मुहूर्त)
+           ======================================================== -->
+      <section class="bg-white rounded-3xl p-5 sm:p-7 shadow-[0_10px_35px_rgba(114,22,40,0.06)] border border-[#EFE5EC] text-center">
+        
+        <p class="font-montserrat text-[10px] tracking-[0.3em] uppercase text-[#72676B] font-semibold mb-3">
+          SAVE THE DATE
+        </p>
+        <h3 class="font-marathi text-3xl text-[#721628] mt-1">
+          शुभ मुहूर्त व तारीख
+        </h3>
+        <p class="font-marathi text-xs text-[#72676B] mt-1">
+          तारीख पाहण्यासाठी खालील तीनही कार्ड स्क्रॅच करा ✨
+        </p>
+
+        <!-- 3 Side-by-Side Scratch Pills: Month | Day | Year -->
+        <div class="grid grid-cols-3 gap-2.5 sm:gap-3 my-5">
+          
+          <!-- 1. MONTH CARD (महिना) -->
+          <div class="relative h-28 rounded-2xl overflow-hidden border border-[#E5D7DF] shadow-sm flex items-center justify-center bg-gradient-to-b from-[#FFFDFE] to-[#FBF5F9]">
+            <div class="flex flex-col items-center justify-center p-2 text-center select-none">
+              <span class="font-montserrat text-[9px] uppercase tracking-wider text-[#72676B]">महिना</span>
+              <span class="font-marathi text-base text-[#721628] mt-1 leading-tight">डिसेंबर</span>
+              <span class="font-montserrat text-[9px] text-[#72676B]">December</span>
+              <span class="text-[10px] text-[#C59B4B] mt-0.5">✨</span>
+            </div>
+            <canvas id="scratch-month" class="absolute inset-0 w-full h-full z-10 cursor-pointer touch-none"></canvas>
+          </div>
+
+          <!-- 2. DAY CARD (दिवस) -->
+          <div class="relative h-28 rounded-2xl overflow-hidden border border-[#E5D7DF] shadow-sm flex items-center justify-center bg-gradient-to-b from-[#FFFDFE] to-[#FBF5F9]">
+            <div class="flex flex-col items-center justify-center p-2 text-center select-none">
+              <span class="font-montserrat text-[9px] uppercase tracking-wider text-[#72676B]">दिवस</span>
+              <span class="font-marathi text-3xl text-[#721628] leading-none my-1">२८</span>
+              <span class="font-montserrat text-[10px] text-[#72676B] font-semibold">सोमवार</span>
+              <span class="text-[10px] text-[#C59B4B]">✨</span>
+            </div>
+            <canvas id="scratch-day" class="absolute inset-0 w-full h-full z-10 cursor-pointer touch-none"></canvas>
+          </div>
+
+          <!-- 3. YEAR CARD (वर्ष) -->
+          <div class="relative h-28 rounded-2xl overflow-hidden border border-[#E5D7DF] shadow-sm flex items-center justify-center bg-gradient-to-b from-[#FFFDFE] to-[#FBF5F9]">
+            <div class="flex flex-col items-center justify-center p-2 text-center select-none">
+              <span class="font-montserrat text-[9px] uppercase tracking-wider text-[#72676B]">वर्ष</span>
+              <span class="font-marathi text-xl text-[#721628] mt-1">२०२६</span>
+              <span class="font-montserrat text-[10px] text-[#72676B]">2026</span>
+              <span class="text-[10px] text-[#C59B4B] mt-0.5">✨</span>
+            </div>
+            <canvas id="scratch-year" class="absolute inset-0 w-full h-full z-10 cursor-pointer touch-none"></canvas>
+          </div>
+
+        </div>
+
+        <p class="font-marathi text-xs text-[#72676B] italic">
+          "दोन जिवांचे मिलन, दोन घराण्यांचे एकीकरण आणि एका नव्या संसाराचा शुभारंभ."
+        </p>
+
+        <!-- Auspicious Muhurat Tagline -->
+        <div class="mt-3 inline-block px-4 py-2 rounded-full bg-[#FAF3F7] border border-[#E5D7DF] text-xs font-marathi tracking-wide text-[#721628]">
+          मार्गशीर्ष वदय पंचमी • दुपारी १२ वा. ४५ मि. • धुळे
+        </div>
+
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 4: LIVE COUNTDOWN TIMER (दिवस, तास, मिनिटे, सेकंद)
+           ======================================================== -->
+      <section class="text-center px-2">
+        <p class="font-marathi text-sm text-[#721628] mb-3">
+          शुभघडी येण्यास उरलेला वेळ
+        </p>
+        <div class="grid grid-cols-4 gap-2.5 max-w-sm mx-auto">
+          
+          <div class="py-3 px-1 rounded-2xl bg-white border border-[#E5D7DF] shadow-sm flex flex-col items-center">
+            <span id="cd-days" class="font-playfair text-3xl text-[#2B1F24] font-normal">--</span>
+            <span class="font-marathi text-[10px] tracking-wide text-[#72676B] mt-0.5">दिवस</span>
+          </div>
+
+          <div class="py-3 px-1 rounded-2xl bg-white border border-[#E5D7DF] shadow-sm flex flex-col items-center">
+            <span id="cd-hours" class="font-playfair text-3xl text-[#2B1F24] font-normal">--</span>
+            <span class="font-marathi text-[10px] tracking-wide text-[#72676B] mt-0.5">तास</span>
+          </div>
+
+          <div class="py-3 px-1 rounded-2xl bg-white border border-[#E5D7DF] shadow-sm flex flex-col items-center">
+            <span id="cd-mins" class="font-playfair text-3xl text-[#2B1F24] font-normal">--</span>
+            <span class="font-marathi text-[10px] tracking-wide text-[#72676B] mt-0.5">मिनिटे</span>
+          </div>
+
+          <div class="py-3 px-1 rounded-2xl bg-white border border-[#E5D7DF] shadow-sm flex flex-col items-center">
+            <span id="cd-secs" class="font-playfair text-3xl text-[#721628] font-normal">--</span>
+            <span class="font-marathi text-[10px] tracking-wide text-[#721628] mt-0.5">सेकंद</span>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 5: MANGALASHTAKA SACRED MUSIC CARD (मंगलाष्टक सूर)
+           ======================================================== -->
+      <section class="bg-gradient-to-br from-white via-[#FCF8FB] to-[#F7EDF4] rounded-3xl p-5 sm:p-6 shadow-[0_10px_35px_rgba(114,22,40,0.06)] border border-[#EFE5EC] text-center">
+        <div class="w-10 h-10 mx-auto rounded-full bg-[#FAF3F7] border border-[#E5D7DF] flex items-center justify-center text-lg text-[#721628] shadow-sm mb-2">
+          🔔
+        </div>
+        <p class="font-montserrat text-[10px] tracking-[0.3em] uppercase text-[#72676B] font-semibold mb-2">
+          TRADITIONAL MANGALASHTAK
+        </p>
+        <h3 class="font-marathi text-2xl text-[#721628] mt-0.5">
+          ।। मंगलाष्टक सूर व श्लोक ।।
+        </h3>
+        <p class="font-marathi italic text-xs text-[#2B1F24] mt-2 leading-relaxed bg-white/70 p-3 rounded-xl border border-[#EFE5EC]">
+          "स्वस्ति श्री गणनायकं गजमुखं मोरेश्वरं सिद्धिदम् ।<br/>
+          बल्लाळं मुरुडं विनायक महं चिन्तामणिं थेवरम् ॥<br/>
+          लेण्याद्रिं गिरिजात्मजं सुवरदं विघ्नेश्वरं ओझरम् ।<br/>
+          ग्रामे रांजण संस्थितं गणपतिं कुर्यात् सदा मङ्गलम् ॥"<br/>
+          <span class="font-marathi not-italic text-sm text-[#721628] block mt-2 font-bold tracking-wider">
+            कुर्यात् सदा मङ्गलम् • शुभमंगल सावधान !
+          </span>
+        </p>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 6: SHUBH VIVAH SOLE CEREMONY (शुभविवाह सोहळा)
+           ======================================================== -->
+      <section class="space-y-4">
+        
+        <div class="text-center">
+          <p class="font-montserrat text-[10px] tracking-[0.3em] uppercase text-[#72676B] font-semibold mb-3">
+            THE SACRED WEDDING CEREMONY
+          </p>
+          <h3 class="font-marathi text-3xl sm:text-4xl text-[#721628] mt-1">
+            शुभविवाह सोहळा
+          </h3>
+          <p class="font-marathi text-xs text-[#72676B] mt-1">
+            मंगलाष्टके, कन्यादान व सप्तपदी विधी
+          </p>
+        </div>
+
+        <!-- MAIN WEDDING CARD -->
+        <div class="bg-white rounded-3xl overflow-hidden shadow-[0_10px_35px_rgba(114,22,40,0.06)] border border-[#EFE5EC]">
+          <div class="pt-5 pb-2 text-center">
+            <span class="font-montserrat text-[10px] tracking-widest uppercase text-[#72676B]">• AUSPICIOUS MUHURAT •</span>
+            <h4 class="font-marathi text-2xl text-[#2B1F24] mt-0.5">• शुभ मुहूर्त •</h4>
+          </div>
+
+          <div class="relative w-full h-72 overflow-hidden px-4">
+            <div class="relative w-full h-full rounded-2xl overflow-hidden shadow-inner">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" 
+                   alt="शुभविवाह" class="w-full h-full object-cover" />
+              
+              <div class="absolute inset-x-4 bottom-3 p-3 rounded-2xl bg-white/95 backdrop-blur-md shadow-lg border border-[#F6EDF3] text-center">
+                <span class="font-marathi text-sm text-[#721628]">शुभ मुहूर्त • दुपारी १२ वा. ४५ मि.</span>
+                <p class="font-marathi text-xs text-[#2B1F24] mt-0.5 font-medium">
+                  सोमवार, २८ डिसेंबर २०२६ (मार्गशीर्ष वदय पंचमी)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 text-center">
+            <h5 class="font-marathi text-xl text-[#2B1F24]">
+              हॉटेल राधे कृष्णा मंगल कार्यालय
+            </h5>
+            <p class="font-marathi text-xs text-[#72676B] mt-0.5">
+              रूपामाई शाळेजवळ, नकाने रोड, देवपूर, धुळे - ४२४००२
+            </p>
+
+            <a href="https://www.google.com/maps/place/Radhe+Krishna+Hall/@20.9145556,74.7533946,17.31z/data=!4m6!3m5!1s0x3bdec5ff1265a013:0xba2ab6f025e7d97a!8m2!3d20.9153111!4d74.7548119!16s%2Fg%2F11m2yjpdkt?entry=ttu&g_ep=EgoyMDI2MTEwNC4wIKXMDSoASAFQAw%3D%3D"
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="inline-flex items-center justify-center gap-1.5 mt-3.5 px-6 py-2 rounded-full bg-[#721628] hover:bg-[#5b101f] text-white font-marathi text-xs tracking-wider shadow-md active:scale-95 transition">
+              <span>📍 नकाशा पहा (VIEW ON MAP)</span>
+            </a>
+
+            <!-- Detailed Ritual Timeline -->
+            <div class="mt-6 pt-4 border-t border-[#EFE5EC] space-y-2.5 text-xs font-marathi text-[#2B1F24] max-w-xs mx-auto text-left">
+              <div class="flex justify-between items-center py-1 border-b border-dashed border-[#EFE5EC] bg-[#FAF3F7] px-2 rounded-lg">
+                <span class="text-[#721628] font-bold">दुपारी १२:४५</span>
+                <span class="font-bold text-[#721628]">मंगलाष्टके, अक्षतारोपण व कन्यादान ✨</span>
+              </div>
+              <!-- <div class="flex justify-between items-center py-1 border-b border-dashed border-[#EFE5EC]">
+                <span class="text-[#72676B]">दुपारी ०१:१५</span>
+                <span class="font-medium">सप्तपदी व होम-हवन विधी</span>
+              </div> -->
+              <div class="flex justify-between items-center py-1 px-2 rounded-lg">
+                <span class="text-[#72676B]">दुपारी ०१:३०</span>
+                <span class="font-medium text-[#721628] font-semibold"> भोजन 🍽️</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 7: SAPTAPADI (सप्तपदी - पवित्र सात वचने)
+           ======================================================== -->
+      <section class="bg-white rounded-3xl p-5 sm:p-7 shadow-[0_10px_35px_rgba(114,22,40,0.06)] border border-[#EFE5EC]">
+        
+        <div class="text-center mb-4">
+          <p class="font-montserrat text-[10px] tracking-[0.3em] uppercase text-[#72676B] font-semibold mb-3">
+            SACRED SEVEN VOWS
+          </p>
+          <h3 class="font-marathi text-2xl sm:text-3xl text-[#721628] mt-0.5">
+            सप्तपदी • पवित्र सात वचने
+          </h3>
+          <p class="font-marathi text-xs text-[#72676B] mt-1">
+            अग्निसाक्षीने घेतलेली जन्मोजन्मीची सात पावले
+          </p>
+        </div>
+
+        <!-- Interactive Vow Display Box -->
+        <div class="p-4 rounded-2xl bg-[#FAF5F8] border border-[#E8DAE2] text-center">
+          <div class="inline-block px-3 py-1 rounded-full bg-[#721628] text-white font-marathi text-xs">
+            पाऊल <span id="vow-num">१</span> / ७
+          </div>
+          <p id="vow-sanskrit" class="font-marathi text-sm text-[#721628] mt-2.5">
+            "ॐ एकमिषे विष्णुस्त्वान्वेतु"
+          </p>
+          <p id="vow-marathi" class="font-marathi text-xs text-[#2B1F24] mt-1.5 leading-relaxed">
+            पहिले पाऊल: घरात धन-धान्याची व अन्नाची कधीही कमतरता भासू नये.
+          </p>
+        </div>
+
+        <!-- 7 Step selector dots -->
+        <div class="flex justify-center items-center gap-2 mt-4">
+          <button onclick="setVow(0)" class="vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#721628] text-white">१</button>
+          <button onclick="setVow(1)" class="vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#FAF3F7] text-[#721628] border border-[#E5D7DF]">२</button>
+          <button onclick="setVow(2)" class="vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#FAF3F7] text-[#721628] border border-[#E5D7DF]">३</button>
+          <button onclick="setVow(3)" class="vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#FAF3F7] text-[#721628] border border-[#E5D7DF]">४</button>
+          <button onclick="setVow(4)" class="vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#FAF3F7] text-[#721628] border border-[#E5D7DF]">५</button>
+          <button onclick="setVow(5)" class="vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#FAF3F7] text-[#721628] border border-[#E5D7DF]">६</button>
+          <button onclick="setVow(6)" class="vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#FAF3F7] text-[#721628] border border-[#E5D7DF]">७</button>
+        </div>
+
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 8: RSVP & PANGAT FEAST SELECTION
+           ======================================================== -->
+      <section class="bg-white rounded-3xl p-5 sm:p-7 shadow-[0_10px_35px_rgba(114,22,40,0.06)] border border-[#EFE5EC]">
+        
+        <div class="text-center mb-4">
+          <!-- <p class="font-montserrat text-[10px] tracking-[0.3em] uppercase text-[#72676B] font-semibold">
+            RSVP
+          </p> -->
+          <h3 class="font-marathi text-2xl sm:text-3xl text-[#721628] mt-0.5">
+             टिप
+          </h3>
+          <p class="font-marathi text-m text-[#72676B] mt-1">
+            आपली उपस्थिती व आशिर्वाद हाच अनमोल आहेर !
+          </p>
+        </div>
+
+        <div class="flex justify-center item-center">
+          <img src="./namaste.png" alt="Namaste Img" height="50px" width="50px">
+        </div>
+     
+
+
+
+
+
+        <!-- <form id="rsvp-form" onsubmit="handleRSVP(event)" class="space-y-3.5">
+          <div>
+            <label class="block font-marathi text-xs text-[#2B1F24] mb-1">आपले पूर्ण नाव</label>
+            <input type="text" required placeholder="नाव प्रविष्ट करा" 
+                   class="w-full px-3.5 py-2.5 rounded-xl border border-[#E5D7DF] bg-[#FAF7F2] text-xs font-marathi focus:outline-none focus:border-[#721628]" />
+          </div>
+
+          <div>
+            <label class="block font-marathi text-xs text-[#2B1F24] mb-1">उपस्थित राहणाऱ्यांची संख्या</label>
+            <select class="w-full px-3.5 py-2.5 rounded-xl border border-[#E5D7DF] bg-[#FAF7F2] text-xs font-marathi focus:outline-none focus:border-[#721628]">
+              <option>१ व्यक्ती (1 Guest)</option>
+              <option>२ व्यक्ती (2 Guests)</option>
+              <option>संपूर्ण परिवार (Family - 3 to 5)</option>
+            </select>
+          </div>
+
+          <button type="submit" 
+                  class="w-full py-2.5 rounded-xl bg-[#721628] hover:bg-[#5b101f] text-white font-marathi text-xs tracking-wide shadow-md active:scale-95 transition mt-2">
+            उपस्थिती निश्चित करा ✨
+          </button>
+        </form> -->
+
+        <!-- <div id="rsvp-success" class="hidden mt-3 p-3 rounded-xl bg-green-50 border border-green-200 text-center text-xs font-marathi text-green-800">
+          धन्यवाद! आपली उपस्थिती आनंदाने नोंदवली गेली आहे.
+        </div> -->
+
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 9: SACRED CLOSING & MADE WITH LOVE FOOTER
+           ======================================================== -->
+      <footer class="pt-6 pb-12 text-center space-y-5" style="margin-top: 0rem !important">
+        
+        <!-- Auspicious ॐ Symbol -->
+        <div class="w-12 h-12 mx-auto rounded-full bg-white border border-[#E5D7DF] grid place-items-center text-2xl text-[#721628] shadow-sm">
+  <span class="transform translate-y-[4px]">ॐ</span>
+</div>
+
+
+
+
+        <div class="space-y-2 max-w-xs mx-auto">
+          <p class="font-marathi text-sm text-[#2B1F24] italic leading-relaxed mb-5">
+            "अक्षता पडता माथ्यावरी, दोन मने गुंफती संसारी ।<br/>
+            आपल्या शुभाशीर्वादाने सजवावी, ही प्रीतीची सुंदर पंढरी ॥"
+          </p>
+          <p class="font-marathi text-xs text-[#721628] font-semibold tracking-wide">
+            — : निमंत्रक : —
+          </p>
+          <p class="font-marathi text-xs text-[#72676B]">
+            — सौ. सुनिता व श्री. अनिल पांडुरंग वाणी —
+          </p>
+        </div>
+
+        <!-- Script Couple Names -->
+        <div class="pt-1">
+          <h4 class="font-alex text-5xl text-[#721628]">
+            Nikhil & Veena
+          </h4>
+        </div>
+
+        <!-- Footer Tag -->
+        <div class="pt-5 border-t border-[#E5D7DF]">
+          <p class="font-montserrat text-[10px] tracking-widest uppercase text-[#72676B] flex items-center justify-center gap-1.5 mb-3">
+            <span>Made with love for Nikhil & Veena</span>
+            <span class="text-[#721628]">❤️</span>
+          </p>
+          <p class="font-montserrat text-[7px] tracking-widest uppercase text-[#72676B] flex items-center justify-center gap-1.5">
+            <span>&copy; Created By: Sumit Shende &copy;</span>
+          </p>
+        </div>
+
+      </footer>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       SCRIPTS: AUDIO PLAYER & INTERACTIVE FEATURES
+       ======================================================== -->
+  <script>
+    const bgAudio = document.getElementById('bg-audio');
+    let isMusicPlaying = false;
+
+    function startMusic() {
+      bgAudio.play().then(() => {
+        isMusicPlaying = true;
+        document.getElementById('audio-label').innerText = '';
+        document.getElementById('eq-1').classList.add('animate-pulse');
+        document.getElementById('eq-2').classList.add('animate-pulse');
+        document.getElementById('eq-3').classList.add('animate-pulse');
+      }).catch(err => {
+        console.log("Audio autoplay restricted:", err);
+      });
+    }
+
+    function pauseMusic() {
+      bgAudio.pause();
+      isMusicPlaying = false;
+      document.getElementById('audio-label').innerText = '';
+      document.getElementById('eq-1').classList.remove('animate-pulse');
+      document.getElementById('eq-2').classList.remove('animate-pulse');
+      document.getElementById('eq-3').classList.remove('animate-pulse');
+    }
+
+    document.getElementById('audio-toggle-btn').addEventListener('click', () => {
+      if (isMusicPlaying) {
+        pauseMusic();
+      } else {
+        startMusic();
+      }
+    });
+
+
+    /* ----------------------------------------------------
+       3D ENVELOPE OPENING ANIMATION SEQUENCE
+       ---------------------------------------------------- */
+    const sealTrigger = document.getElementById('seal-trigger');
+    const flapTop = document.getElementById('flap-top');
+    const flapLeft = document.getElementById('flap-left');
+    const flapRight = document.getElementById('flap-right');
+    const butterflyScreen = document.getElementById('butterfly-reveal-screen');
+    const envelopeOverlay = document.getElementById('envelope-overlay');
+    const appContainer = document.getElementById('app-container');
+
+    let envelopeOpened = false;
+
+    function openEnvelope() {
+      if (envelopeOpened) return;
+      envelopeOpened = true;
+
+      startMusic();
+
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 50,
+          spread: 75,
+          origin: { y: 0.5 },
+          colors: ['#EBDDE7', '#721628', '#C59B4B', '#FFFFFF']
+        });
+      }
+
+      sealTrigger.style.transform = 'scale(0.85)';
+      sealTrigger.style.opacity = '0';
+      sealTrigger.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        flapTop.classList.add('flap-top-open');
+      }, 200);
+
+      setTimeout(() => {
+        flapLeft.classList.add('flap-left-open');
+        flapRight.classList.add('flap-right-open');
+      }, 480);
+
+      setTimeout(() => {
+        butterflyScreen.style.opacity = '1';
+        butterflyScreen.style.pointerEvents = 'auto';
+      }, 800);
+
+      setTimeout(() => {
+        envelopeOverlay.style.transition = 'opacity 1.2s ease';
+        envelopeOverlay.style.opacity = '0';
+
+        document.body.classList.remove('scroll-locked');
+        appContainer.classList.remove('scroll-locked');
+        appContainer.classList.add('overflow-y-auto');
+
+        setTimeout(() => {
+          envelopeOverlay.style.display = 'none';
+        }, 1200);
+      }, 2800);
+    }
+
+    sealTrigger.addEventListener('click', openEnvelope);
+
+
+    /* ----------------------------------------------------
+       THREE-CARD SCRATCH TO REVEAL DATE (महिना, दिवस, वर्ष)
+       ---------------------------------------------------- */
+    function initScratchPill(canvasId, titleText, subtitleText) {
+      const cvs = document.getElementById(canvasId);
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+      let isDrawing = false;
+      let strokeCount = 0;
+      let isDone = false;
+
+      function drawFoil() {
+        const rect = cvs.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        cvs.width = rect.width * dpr;
+        cvs.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+
+        const w = rect.width;
+        const h = rect.height;
+
+        const grad = ctx.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, '#EBDDE7');
+        grad.addColorStop(0.5, '#DFC8D7');
+        grad.addColorStop(1, '#CEB3C4');
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.lineWidth = 1.2;
+        ctx.strokeRect(5, 5, w - 10, h - 10);
+
+        ctx.fillStyle = '#721628';
+        ctx.font = 'bold 11px "Noto Serif Devanagari", "Yatra One", cursive';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(titleText, w / 2, h / 2 - 8);
+
+        ctx.font = '500 8px Montserrat, sans-serif';
+        ctx.fillStyle = '#72676B';
+        ctx.fillText(subtitleText, w / 2, h / 2 + 10);
+      }
+
+      function getCoords(e) {
+        const rect = cvs.getBoundingClientRect();
+        const cx = e.touches ? e.touches[0].clientX : e.clientX;
+        const cy = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: cx - rect.left, y: cy - rect.top };
+      }
+
+      function erase(pos) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, 16, 0, Math.PI * 2);
+        ctx.fill();
+
+        strokeCount++;
+        if (strokeCount > 18 && !isDone) {
+          isDone = true;
+          cvs.style.transition = 'opacity 0.5s ease';
+          cvs.style.opacity = '0';
+          setTimeout(() => { cvs.style.display = 'none'; }, 500);
+
+          if (typeof confetti === 'function') {
+            confetti({
+              particleCount: 25,
+              spread: 60,
+              origin: { y: 0.45 },
+              colors: ['#C59B4B', '#721628', '#EBDDE7']
+            });
+          }
+        }
+      }
+
+      ['mousedown', 'touchstart'].forEach(evt => {
+        cvs.addEventListener(evt, (e) => {
+          isDrawing = true;
+          erase(getCoords(e));
+          if (e.cancelable) e.preventDefault();
+        }, { passive: false });
+      });
+
+      ['mousemove', 'touchmove'].forEach(evt => {
+        cvs.addEventListener(evt, (e) => {
+          if (!isDrawing) return;
+          erase(getCoords(e));
+          if (e.cancelable) e.preventDefault();
+        }, { passive: false });
+      });
+
+      ['mouseup', 'mouseleave', 'touchend'].forEach(evt => {
+        cvs.addEventListener(evt, () => { isDrawing = false; });
+      });
+
+      drawFoil();
+    }
+
+    function initAllScratchCards() {
+      initScratchPill('scratch-month', 'महिना', '✦ SCRATCH');
+      initScratchPill('scratch-day', 'दिवस', '✦ SCRATCH');
+      initScratchPill('scratch-year', 'वर्ष', '✦ SCRATCH');
+    }
+
+
+    /* ----------------------------------------------------
+       COUNTDOWN TIMER (DECEMBER 28, 2026 12:45 PM)
+       ---------------------------------------------------- */
+    const targetDate = new Date('2026-12-28T12:45:00').getTime();
+
+    function toDevanagariNumerals(num) {
+      const devanagariDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+      return String(num).split('').map(d => devanagariDigits[parseInt(d)] || d).join('');
+    }
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById('cd-days').innerText = '००';
+        document.getElementById('cd-hours').innerText = '००';
+        document.getElementById('cd-mins').innerText = '००';
+        document.getElementById('cd-secs').innerText = '००';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').innerText = toDevanagariNumerals(String(days).padStart(2, '0'));
+      document.getElementById('cd-hours').innerText = toDevanagariNumerals(String(hours).padStart(2, '0'));
+      document.getElementById('cd-mins').innerText = toDevanagariNumerals(String(mins).padStart(2, '0'));
+      document.getElementById('cd-secs').innerText = toDevanagariNumerals(String(secs).padStart(2, '0'));
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+
+    /* ----------------------------------------------------
+       SAPTAPADI (पवित्र सात वचने) INTERACTIVE STEPPER
+       ---------------------------------------------------- */
+    const saptapadiData = [
+      {
+        num: "१",
+        sanskrit: "ॐ एकमिषे विष्णुस्त्वान्वेतु",
+        marathi: "पहिले पाऊल: घरात धन-धान्याची व अन्नाची कधीही कमतरता भासू नये, आरोग्य उत्तम राहो."
+      },
+      {
+        num: "२",
+        sanskrit: "ॐ द्वे ऊर्जे विष्णुस्त्वान्वेतु",
+        marathi: "दुसरे पाऊल: शरीराने आणि मनाने नेहमी सक्षम राहून एकमेकांची ताकद बनावे."
+      },
+      {
+        num: "३",
+        sanskrit: "ॐ त्रीणि रायस्पोषाय विष्णुस्त्वान्वेतु",
+        marathi: "तिसरे पाऊल: संसारात समृद्धी, धर्म आणि सत्याची वृद्धी व्हावी."
+      },
+      {
+        num: "४",
+        sanskrit: "ॐ चत्वारि मायोभवाय विष्णुस्त्वान्वेतु",
+        marathi: "चौथे पाऊल: सुख-दुःखात एकमेकांचा आदर आणि कुटुंबाचा सन्मान करावा."
+      },
+      {
+        num: "५",
+        sanskrit: "ॐ पञ्च पशुभ्यो विष्णुस्त्वान्वेतु",
+        marathi: "पाचवे पाऊल: गोधन, वास्तू आणि संतती समृद्धीने घराचे नंदनवन व्हावे."
+      },
+      {
+        num: "६",
+        sanskrit: "ॐ षडृतुभ्यो विष्णुस्त्वान्वेतु",
+        marathi: "सहावे पाऊल: प्रत्येक ऋतूत, सुख-शांती व समाधानाने संसार बहरावा."
+      },
+      {
+        num: "७",
+        sanskrit: "ॐ सखे सप्तपदा भवा",
+        marathi: "सातवे पाऊल: आपण आयुष्यभर एकनिष्ठ मित्र आणि अर्धांगिनी म्हणून सोबत राहू."
+      }
+    ];
+
+    function setVow(idx) {
+      const v = saptapadiData[idx];
+      document.getElementById('vow-num').innerText = v.num;
+      document.getElementById('vow-sanskrit').innerText = `"${v.sanskrit}"`;
+      document.getElementById('vow-marathi').innerText = v.marathi;
+
+      const dots = document.querySelectorAll('.vow-dot');
+      dots.forEach((d, i) => {
+        if (i === idx) {
+          d.className = 'vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#721628] text-white shadow-sm';
+        } else {
+          d.className = 'vow-dot w-7 h-7 rounded-full text-xs font-marathi bg-[#FAF3F7] text-[#721628] border border-[#E5D7DF]';
+        }
+      });
+    }
+
+
+    /* ----------------------------------------------------
+       RSVP FORM SUBMISSION
+       ---------------------------------------------------- */
+    function handleRSVP(e) {
+      e.preventDefault();
+      document.getElementById('rsvp-success').classList.remove('hidden');
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 40,
+          spread: 65,
+          origin: { y: 0.6 },
+          colors: ['#721628', '#C59B4B', '#EBDDE7']
+        });
+      }
+    }
+
+
+    /* ----------------------------------------------------
+       WINDOW LOAD & RESIZE
+       ---------------------------------------------------- */
+    window.onload = function() {
+      initAllScratchCards();
+    };
+
+    window.addEventListener('resize', () => {
+      initAllScratchCards();
+    });
+  </script>
+</body>
+</html>
